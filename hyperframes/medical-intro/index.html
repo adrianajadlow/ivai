@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@hyperframes/core/dist/hyperframe.runtime.iife.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@hyperframes/shader-transitions/dist/index.global.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* === IVAI Brand Identity === */
+        --bg: #010534;
+        --ink: #ffffff;
+        --accent: #0062ff;
+        --accent-light: #4d9fff;
+        --muted: #8892b0;
+        --muted-dark: #3d4a5c;
+        --font-display: "Inter", sans-serif;
+        --font-data: "JetBrains Mono", monospace;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      .scene {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+      .scene-content {
+        width: 100%;
+        height: 100%;
+        padding: 100px 160px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 24px;
+        box-sizing: border-box;
+        position: relative;
+        z-index: 1;
+      }
+      .clip {
+      }
+
+      .display {
+        font-family: var(--font-display);
+        font-weight: 700;
+        line-height: 1.1;
+        font-size: 72px;
+      }
+      .display-xl {
+        font-family: var(--font-display);
+        font-weight: 900;
+        line-height: 1.05;
+        font-size: 120px;
+      }
+      .body-text {
+        font-family: var(--font-display);
+        font-weight: 500;
+        line-height: 1.6;
+        color: var(--muted);
+        font-size: 36px;
+        max-width: 1200px;
+      }
+      .stat-number {
+        font-family: var(--font-display);
+        font-weight: 900;
+        font-size: 180px;
+        line-height: 1;
+        color: var(--accent);
+      }
+      .stat-label {
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-size: 48px;
+        color: var(--muted);
+      }
+      .accent-text {
+        color: var(--accent);
+      }
+      .data-text {
+        font-family: var(--font-data);
+        font-weight: 400;
+        font-variant-numeric: tabular-nums;
+        font-size: 28px;
+      }
+
+      .grain {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 50;
+        opacity: 0.12;
+        background-image:
+          radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1.2px),
+          radial-gradient(rgba(0, 0, 0, 0.18) 1px, transparent 1.2px);
+        background-size:
+          3px 3px,
+          5px 5px;
+        background-position:
+          0 0,
+          1px 2px;
+        mix-blend-mode: overlay;
+      }
+
+      .vignette {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 49;
+        background: radial-gradient(ellipse at center, transparent 50%, rgba(1, 5, 52, 0.6) 100%);
+      }
+
+      .glow {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .glow-accent {
+        background: radial-gradient(circle, rgba(0, 98, 255, 0.3) 0%, transparent 70%);
+      }
+
+      .divider {
+        width: 60px;
+        height: 3px;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="main"
+      data-composition-id="main"
+      data-width="1920"
+      data-height="1080"
+      data-start="0"
+      data-duration="60"
+    >
+      <!-- SCENE 1 -- visible from t=0, opener -->
+      <div class="scene clip" id="s1" data-start="0" data-duration="4" data-track-index="0">
+        <div class="grain"></div>
+        <div class="vignette"></div>
+        <div class="glow glow-accent" style="top: -100px; left: 200px; width: 400px; height: 400px;"></div>
+        <div class="scene-content">
+          <div class="divider" id="s1-divider"></div>
+          <h1 class="body-text" id="s1-hook">If you run a medical office,</h1>
+          <h1 class="body-text" id="s1-hook-2">you know this feeling.</h1>
+        </div>
+      </div>
+
+      <!-- SCENE 2 -- pain opener: phones -->
+      <div
+        class="scene clip"
+        id="s2"
+        data-start="4"
+        data-duration="3.5"
+        data-track-index="0"
+        style="visibility:hidden;"
+      >
+        <div class="grain"></div>
+        <div class="vignette"></div>
+        <div class="scene-content">
+          <p class="display" id="s2-text1">The phones</p>
+          <p class="display" id="s2-text2">never stop.</p>
+        </div>
+      </div>
+
+      <!-- SCENE 3 -- pain: missed calls -->
+      <div
+        class="scene clip"
+        id="s3"
+        data-start="7.5"
+        data-duration="3"
+        data-track-index="0"
+        style="visibility:hidden;"
+      >
+        <div class="grain"></div>
+        <div class="vignette"></div>
+        <div class="scene-content">
+          <p class="display accent-text" id="s3-text">Missed calls.</p>
+        </div>
+      </div>
+
+      <!-- SCENE 4 -- pain: no-shows stat card -->
+      <div
+        class="scene clip"
+        id="s4"
+        data-start="10.5"
+        data-duration="4"
+        data-track-index="0"
+        style="opacity:0;"
+      >
+        <div class="grain"></div>
+        <div class="vignette"></div>
+        <div class="glow glow-accent" style="top: 100px; right: 200px; width: 500px; height: 500px;"></div>
+        <div class="scene-content">
+          <div class="stat-number" id="s4-stat">15-30%</div>
+          <div class="stat-label" id="s4-label">Average no-show rate</div>
+          <p class="data-text" id="s4-sub">Costing billions annually</p>
+        </div>
+      </div>
+
+      <!-- SCENE 5 -- pain: money bleed -->
+      <div
+        class="scene clip"
+        id="s5"
+        data-start="14.5"
+        data-duration="4"
+        data-track-index="0"
+        style="opacity:0;"
+      >
+        <div class="grain"></div>
+        <div class="vignette"></div>
+        <div class="glow glow-accent" style="bottom: 100px; left: 200px; width: 450px; height: 450px;"></div>
+        <div class="scene-content">
+          <div class="stat-number" id="s5-stat">$150K-$300K</div>
+          <div class="stat-label" id="s5-label">Lost per physician, per year</div>
+          <p class="data-text" id="s5-sub">From operational inefficiencies alone</p>
+        </div>
+      </div>
+
+      <!-- SCENE 6 -- pain: staff crisis -->
+      <div
+        class="scene clip"
+        id="s6"
+        data-start="18.5"
+        data-duration="3.5"
+        data-track-index="0"
+        style="visibility:hidden;"
+      >
+        <div class="grain"></div>
+        <div class="vignette"></div>
+        <div class="scene-content">
+          <p class="display" id="s6-text1">Your team is drowning</p>
+          <p class="display" id="s6-text2">in admin.</p>
+        </div>
+      </div>
+
+      <!-- SCENE 7 -- turn: then I found -->
+      <div
+        class="scene clip"
+        id="s7"
+        data-start="22"
+        data-duration="3"
+        data-track-index="0"
+        style="visibility:hidden;"
+      >
+        <div class="grain"></div>
+        <div class="vignette"></div>
+        <div class="scene-content">
+          <p class="display accent-text" id="s7-turn">Then I found</p>
+          <p class="display" id="s7-what">Intelligent Voice AI.</p>
+        </div>
+      </div>
+
+      <!-- SCENE 8 -- solution: hero reveal (shader anchor) -->
+      <div
+        class="scene clip"
+        id="s8"
+        data-start="25"
+        data-duration="4.5"
+        data-track-index="0"
+        style="opacity:0;"
+      >
+        <div class="grain"></div>
+        <div class="vignette"></div>
+        <div class="glow glow-accent" style="top: 50%; right: -50px; width: 600px; height: 600px;"></div>
+        <div class="scene-content">
+          <div class="divider" id="s8-divider"></div>
+          <h1 class="display-xl" id="s8-hero" style="color: var(--accent);">Your AI</h1>
+          <h1 class="display-xl" id="s8-hero-2">front desk.</h1>
+          <p class="body-text" id="s8-sub" style="margin-top: 20px;">24/7 voice agents. HIPAA-compliant. SOC 2 secure.</p>
+        </div>
+      </div>
+
+      <!-- SCENE 9 -- solution: what it does -->
+      <div
+        class="scene clip"
+        id="s9"
+        data-start="29.5"
+        data-duration="4"
+        data-track-index="0"
+        style="visibility:hidden;"
+      >
+        <div class="grain"></div>
+        <div class="vignette"></div>
+        <div class="scene-content">
+          <h2 class="display" id="s9-verb1">Answer.</h2>
+          <h2 class="display accent-text" id="s9-verb2" style="margin-top: 12px;">Book.</h2>
+          <h2 class="display" id="s9-verb3" style="margin-top: 12px;">Remind.</h2>
+          <h2 class="display accent-text" id="s9-verb4" style="margin-top: 12px;">Bill.</h2>
+        </div>
+      </div>
+
+      <!-- SCENE 10 -- result: 75% fewer no-shows (shader anchor) -->
+      <div
+        class="scene clip"
+        id="s10"
+        data-start="33.5"
+        data-duration="4.5"
+        data-track-index="0"
+        style="opacity:0;"
+      >
+        <div class="grain"></div>
+        <div class="vignette"></div>
+        <div class="glow glow-accent" style="top: 150px; left: 150px; width: 550px; height: 550px;"></div>
+        <div class="scene-content">
+          <div class="stat-number" id="s10-stat">75%</div>
+          <div class="stat-label" id="s10-label">Fewer no-shows</div>
+          <p class="data-text" id="s10-sub">30% → 7.5% in 90 days (CA medical clinic)</p>
+        </div>
+      </div>
+
+      <!-- SCENE 11 -- result: revenue recovered -->
+      <div
+        class="scene clip"
+        id="s11"
+        data-start="38"
+        data-duration="4"
+        data-track-index="0"
+        style="visibility:hidden;"
+      >
+        <div class="grain"></div>
+        <div class="vignette"></div>
+        <div class="scene-content">
+          <div class="stat-number" id="s11-stat">+$215K</div>
+          <div class="stat-label" id="s11-label">Captured in Year 1</div>
+          <p class="data-text" id="s11-sub">Same clinic, after deploying Evolve agents</p>
+        </div>
+      </div>
+
+      <!-- SCENE 12 -- relief: back to what matters -->
+      <div
+        class="scene clip"
+        id="s12"
+        data-start="42"
+        data-duration="4"
+        data-track-index="0"
+        style="visibility:hidden;"
+      >
+        <div class="grain"></div>
+        <div class="vignette"></div>
+        <div class="scene-content">
+          <p class="display" id="s12-text1">My team is back to</p>
+          <p class="display accent-text" id="s12-text2">what matters.</p>
+          <p class="body-text" id="s12-text3" style="margin-top: 16px; color: var(--muted);">Our patients.</p>
+        </div>
+      </div>
+
+      <!-- SCENE 13 -- CTA: brand close (shader anchor) -->
+      <div
+        class="scene clip"
+        id="s13"
+        data-start="46"
+        data-duration="5"
+        data-track-index="0"
+        style="opacity:0;"
+      >
+        <div class="grain"></div>
+        <div class="vignette"></div>
+        <div class="glow glow-accent" style="inset: 0; width: 100%; height: 100%; opacity: 0.15;"></div>
+        <div class="scene-content" style="justify-content: center; align-items: center;">
+          <div style="text-align: center;">
+            <h1 class="display-xl" id="s13-brand" style="margin-bottom: 24px;">Intelligent Voice AI</h1>
+            <p class="display" id="s13-tagline" style="color: var(--accent); font-weight: 500;">Your AI front desk. Always on. Never tired.</p>
+            <p class="body-text" id="s13-url" style="margin-top: 40px; color: var(--accent-light); font-size: 48px;">GetIVAI.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      // --- Non-anchor scene visibility toggles (autoAlpha: 1 at start, 0 at end) ---
+      tl.set("#s1", { autoAlpha: 0 }, 4.0);
+      tl.set("#s2", { autoAlpha: 1 }, 4.0);
+      tl.set("#s2", { autoAlpha: 0 }, 7.5);
+      tl.set("#s3", { autoAlpha: 1 }, 7.5);
+      tl.set("#s3", { autoAlpha: 0 }, 10.5);
+
+      // s4, s5 are shader anchors — HyperShader manages their opacity after first transition
+      tl.set("#s4", { opacity: 1 }, 10.5); // first anchor must be explicitly shown
+
+      tl.set("#s6", { autoAlpha: 1 }, 18.5);
+      tl.set("#s6", { autoAlpha: 0 }, 22.0);
+      tl.set("#s7", { autoAlpha: 1 }, 22.0);
+      tl.set("#s7", { autoAlpha: 0 }, 25.0);
+
+      // s8 is first anchor of second shader group
+      tl.set("#s8", { opacity: 1 }, 25.0);
+
+      tl.set("#s9", { autoAlpha: 1 }, 29.5);
+      tl.set("#s9", { autoAlpha: 0 }, 33.5);
+
+      // s10 is first anchor of third shader group
+      tl.set("#s10", { opacity: 1 }, 33.5);
+
+      tl.set("#s11", { autoAlpha: 1 }, 38.0);
+      tl.set("#s11", { autoAlpha: 0 }, 42.0);
+      tl.set("#s12", { autoAlpha: 1 }, 42.0);
+      tl.set("#s12", { autoAlpha: 0 }, 46.0);
+
+      // s13 is final anchor — no hide needed (final scene)
+
+      // === SCENE 1 (0-4s) — hook ===
+      tl.from("#s1-divider", { scaleX: 0, transformOrigin: "left", duration: 0.5, ease: "power2.out" }, 0.2);
+      tl.from("#s1-hook", { y: 40, autoAlpha: 0, duration: 0.6, ease: "power3.out" }, 0.5);
+      tl.from("#s1-hook-2", { y: 30, autoAlpha: 0, duration: 0.5, ease: "power2.out" }, 1.0);
+      tl.to(
+        ".glow",
+        { opacity: [0.2, 0.3, 0.2], duration: 3.2, ease: "sine.inOut" },
+        0
+      );
+
+      // === SCENE 2 (4-7.5s) — phones never stop ===
+      tl.from("#s2-text1", { y: 60, autoAlpha: 0, duration: 0.6, ease: "power3.out" }, 4.2);
+      tl.from("#s2-text2", { y: 40, autoAlpha: 0, duration: 0.5, ease: "power2.out" }, 4.7);
+
+      // === SCENE 3 (7.5-10.5s) — missed calls ===
+      tl.from("#s3-text", { x: -80, autoAlpha: 0, duration: 0.7, ease: "power3.out" }, 7.8);
+      tl.to("#s3-text", { x: 0, duration: 1.5, ease: "sine.inOut", yoyo: true, repeat: 1 }, 8.5);
+
+      // === SCENE 4 (10.5-14.5s) — SHADER ANCHOR, 15-30% no-show ===
+      tl.from("#s4-stat", { scale: 0, autoAlpha: 0, duration: 0.8, ease: "expo.out" }, 10.8);
+      tl.from("#s4-label", { y: 20, autoAlpha: 0, duration: 0.6, ease: "power2.out" }, 11.3);
+      tl.from("#s4-sub", { y: 15, autoAlpha: 0, duration: 0.5, ease: "power2.out" }, 11.7);
+      // Mid-scene: gentle glow pulse
+      tl.to(
+        ".glow",
+        { opacity: [0.2, 0.4, 0.2], duration: 3.0, ease: "sine.inOut" },
+        10.5
+      );
+
+      // === SCENE 5 (14.5-18.5s) — SHADER ANCHOR, $150K-$300K ===
+      tl.from("#s5-stat", { scale: 0, autoAlpha: 0, duration: 0.8, ease: "expo.out" }, 14.8);
+      tl.from("#s5-label", { y: 20, autoAlpha: 0, duration: 0.6, ease: "power2.out" }, 15.3);
+      tl.from("#s5-sub", { y: 15, autoAlpha: 0, duration: 0.5, ease: "power2.out" }, 15.7);
+      // Counter animation for stat
+      var counterObj5 = { v: 0 };
+      tl.to(
+        counterObj5,
+        {
+          v: 225000,
+          duration: 2.5,
+          ease: "power2.out",
+          onUpdate: function () {
+            document.getElementById("s5-stat").textContent =
+              "$" + Math.round(counterObj5.v / 1000) + "K";
+          },
+        },
+        14.8
+      );
+
+      // === SCENE 6 (18.5-22s) — team drowning ===
+      tl.from("#s6-text1", { y: 50, autoAlpha: 0, duration: 0.6, ease: "power3.out" }, 18.8);
+      tl.from("#s6-text2", { y: 40, autoAlpha: 0, duration: 0.5, ease: "power2.out" }, 19.3);
+
+      // === SCENE 7 (22-25s) — turn ===
+      tl.from("#s7-turn", { x: -80, autoAlpha: 0, duration: 0.6, ease: "power3.out" }, 22.2);
+      tl.from("#s7-what", { x: -60, autoAlpha: 0, duration: 0.6, ease: "power2.out" }, 22.7);
+
+      // === SCENE 8 (25-29.5s) — hero reveal (shader from s7→s8) ===
+      tl.from("#s8-divider", { scaleX: 0, transformOrigin: "left", duration: 0.5, ease: "power2.out" }, 25.2);
+      tl.from("#s8-hero", { scale: 0.8, autoAlpha: 0, duration: 0.7, ease: "expo.out" }, 25.5);
+      tl.from("#s8-hero-2", { y: 30, autoAlpha: 0, duration: 0.6, ease: "power2.out" }, 25.9);
+      tl.from("#s8-sub", { y: 20, autoAlpha: 0, duration: 0.5, ease: "power2.out" }, 26.3);
+      // Glow pulse
+      tl.to(
+        ".glow",
+        { opacity: [0.25, 0.4, 0.25], duration: 3.0, ease: "sine.inOut" },
+        25.0
+      );
+
+      // === SCENE 9 (29.5-33.5s) — Answer. Book. Remind. Bill. ===
+      tl.from(
+        ["#s9-verb1", "#s9-verb2", "#s9-verb3", "#s9-verb4"],
+        {
+          y: 40,
+          autoAlpha: 0,
+          duration: 0.5,
+          ease: "power3.out",
+          stagger: { each: 0.3, from: "start" },
+        },
+        29.8
+      );
+      // Slight breathing motion on verbs
+      tl.to(
+        "#s9-verb1",
+        { y: -3, duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 1 },
+        30.8
+      );
+
+      // === SCENE 10 (33.5-38s) — SHADER ANCHOR, 75% fewer no-shows ===
+      tl.from("#s10-stat", { scale: 0, autoAlpha: 0, duration: 0.8, ease: "expo.out" }, 33.8);
+      tl.from("#s10-label", { y: 20, autoAlpha: 0, duration: 0.6, ease: "power2.out" }, 34.3);
+      tl.from("#s10-sub", { y: 15, autoAlpha: 0, duration: 0.5, ease: "power2.out" }, 34.7);
+      // Glow pulse
+      tl.to(
+        ".glow",
+        { opacity: [0.2, 0.4, 0.2], duration: 3.5, ease: "sine.inOut" },
+        33.5
+      );
+
+      // === SCENE 11 (38-42s) — +$215K revenue ===
+      tl.from("#s11-stat", { scale: 0, autoAlpha: 0, duration: 0.8, ease: "expo.out" }, 38.2);
+      tl.from("#s11-label", { y: 20, autoAlpha: 0, duration: 0.6, ease: "power2.out" }, 38.7);
+      tl.from("#s11-sub", { y: 15, autoAlpha: 0, duration: 0.5, ease: "power2.out" }, 39.1);
+      // Counter animation
+      var counterObj11 = { v: 0 };
+      tl.to(
+        counterObj11,
+        {
+          v: 215000,
+          duration: 2.2,
+          ease: "power2.out",
+          onUpdate: function () {
+            document.getElementById("s11-stat").textContent =
+              "+$" + Math.round(counterObj11.v / 1000) + "K";
+          },
+        },
+        38.2
+      );
+
+      // === SCENE 12 (42-46s) — back to what matters ===
+      tl.from("#s12-text1", { y: 40, autoAlpha: 0, duration: 0.6, ease: "power3.out" }, 42.2);
+      tl.from("#s12-text2", { y: 30, autoAlpha: 0, duration: 0.5, ease: "power2.out" }, 42.7);
+      tl.from("#s12-text3", { y: 20, autoAlpha: 0, duration: 0.5, ease: "power2.out" }, 43.1);
+      // Breathing float
+      tl.to(
+        "#s12-text2",
+        { y: -5, duration: 1.5, ease: "sine.inOut", yoyo: true, repeat: 1 },
+        43.5
+      );
+
+      // === SCENE 13 (46-51s) — SHADER ANCHOR, final CTA brand ===
+      tl.from("#s13-brand", { scale: 0.8, autoAlpha: 0, duration: 0.8, ease: "expo.out" }, 46.3);
+      tl.from("#s13-tagline", { y: 20, autoAlpha: 0, duration: 0.6, ease: "power2.out" }, 46.9);
+      tl.from("#s13-url", { y: 20, autoAlpha: 0, duration: 0.6, ease: "power2.out" }, 47.4);
+      // Glow pulse on final card
+      tl.to(
+        ".glow",
+        { opacity: [0.1, 0.25, 0.1], duration: 4.0, ease: "sine.inOut" },
+        46.0
+      );
+
+      // --- Shader transitions: 3 key moments ---
+      // Transition 1: s4→s5 (pain stat progression)
+      // Transition 2: s7→s8 (turn to hero reveal)
+      // Transition 3: s9→s10 (solution to result)
+      // Final: s12→s13 (relief to CTA)
+      window.HyperShader.init({
+        bgColor:
+          getComputedStyle(document.documentElement).getPropertyValue("--bg").trim() || "#010534",
+        scenes: ["s4", "s5", "s8", "s10", "s13"],
+        timeline: tl,
+        transitions: [
+          { time: 14.25, shader: "cinematic-zoom", duration: 0.5 },
+          { time: 24.75, shader: "cross-warp-morph", duration: 0.5 },
+          { time: 33.25, shader: "whip-pan", duration: 0.5 },
+          { time: 45.75, shader: "flash-through-white", duration: 0.4 },
+        ],
+      });
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
