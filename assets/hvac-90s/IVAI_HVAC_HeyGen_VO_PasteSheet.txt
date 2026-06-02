@@ -1,0 +1,55 @@
+IVAI HVAC COMMERCIAL — HEYGEN VO PASTE SHEET
+Voice clone ID: bb1ceb3a38ff449c954f241b122c0dba
+Target runtime: ~100 seconds at 140 wpm (236 words)
+
+HOW TO USE THIS SHEET
+Paste the block under "CLEAN SCRIPT" directly into the HeyGen script box for your voice clone. It is already cleaned for text to speech: em dashes removed, emphasis caps lowercased (HeyGen reads all caps unreliably), hyphens stripped, and the URL spelled phonetically so it does not get mangled. Add emphasis and pauses in the HeyGen editor using the notes below, not in the raw text.
+
+
+CLEAN SCRIPT (paste this)
+
+You are spending money every single month to make your phone ring.
+
+Google ads. Local service ads. Yard signs. Door hangers. Social media.
+
+And when that phone finally rings, nobody picks up.
+
+That is not a marketing problem. That is a money problem.
+
+The average HVAC company misses thirty percent of inbound calls during peak season. At an average ticket of four hundred dollars per service call, and average ad spend of thirty to fifty dollars per lead, every missed call costs you the lead spend plus the job. That is eighty to four hundred and fifty dollars, gone, every time your phone rings and nobody answers.
+
+And while you are missing that call, your competitor's truck is pulling into that driveway. Your trucks are sitting. Your techs are waiting. Your schedule has gaps.
+
+On top of that, HVAC emergencies don't happen at nine in the morning. They happen at ten at night. In July. When it's a hundred and four degrees and a family's AC just died. If nobody answers, they call the next company. Every time.
+
+Evolve AI Agents from Intelligent Voice AI answers every call. Books the job. Dispatches your tech. And handles follow up for every missed lead, twenty four hours a day, seven days a week.
+
+Your trucks stay busy. Your techs stay productive. Your revenue stops leaking.
+
+Visit getivai dot com slash H V A C.
+
+Stop paying for leads your phone never answers.
+
+
+EMPHASIS NOTES (set in HeyGen editor)
+Lean in and stress these words, since the all caps were removed for clean audio:
+- "money problem" (the pivot line)
+- "your trucks are sitting / your techs are waiting / your schedule has gaps"
+- "your competitor's truck is pulling into that driveway"
+- "Evolve booked it" energy on the resolution paragraph
+- "stops leaking"
+
+PAUSE NOTES (use HeyGen pause control, 0.7s)
+- After "four hundred dollars per service call,"
+- After "eighty to four hundred and fifty dollars,"
+- Short beat after "In July." and after "Every time."
+
+PRONUNCIATION FLAGS (add to your HeyGen Brand Glossary if not already)
+- IVAI — confirm your existing glossary entry is active so it does not read as "ivy" or letters out of order.
+- getivai.com — your glossary entry should carry; the line above is written phonetically as a backup.
+- HVAC — trade pronunciation is "aitch vack." If HeyGen reads it letter by letter ("H V A C") and you prefer the trade sound, add "HVAC = aitch vack" to the glossary. Both are acceptable; pick one and keep it consistent.
+- AC — should read as the letters "A C" (correct for air conditioning). Leave as is.
+- Evolve AI Agents — "AI" reads as "A I," which is correct.
+
+WORD COUNT CHECK
+236 words. At 140 wpm that is 1 minute 41 seconds before pauses. The 0.7s pauses and beats push it to roughly 100 to 104 seconds, which matches the spec window. If your generated take runs long, trim the beat after "Every time" first.
