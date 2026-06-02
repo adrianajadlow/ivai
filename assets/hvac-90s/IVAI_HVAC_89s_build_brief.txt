@@ -1,0 +1,51 @@
+IVAI HVAC — 89s CINEMATIC CUT · DESCRIPT EDITOR-AGENT BRIEF
+Paste this into the Descript AI editor (prompt_project_agent) on project
+bc3fae11-48e3-41d5-841f-80a1e45dfccc once AI credits are available.
+(Authored for the "combine all into one cinematic dynamic 89s video" build.)
+
+------------------------------------------------------------------------
+Build a NEW composition in this project named "IVAI HVAC — 89s Cinematic Cut".
+Do NOT modify or delete the existing composition.
+
+GOAL: One cinematic, dynamic ~89-second 16:9 (1920x1080) HVAC commercial for
+Intelligent Voice AI (IVAI), assembled from the HVAC scene clips already in this
+project, with ONE clean voiceover bed.
+
+AUDIO (most important):
+- Use the narration "ElevenLabs_2026-05-31T08_50_52_Adriana — IVAI Host_ivc_sp100_s50_sb75_se0_b_m2 (1).mp3"
+  (~84s) as the SINGLE master voiceover track. First spoken word lands ~4 seconds in
+  (short cold-open/logo first).
+- MUTE the built-in audio of every video clip so nothing fights the narration.
+- Optional: one of the 30s music tracks as a soft bed at ~ -22 dB under the VO.
+
+VISUALS — sequence the HVAC scene clips to follow the narration's story, cutting/
+crossfading on the beats. Use the 15s owner clips (scene 2, scene 3, scene 4,
+scene 2-1, scene 3-1, scene 4-1, "some scene", "ya") for longer stretches and the
+8s talking-head clips (scene 1, "first scene", "scene 2 hvac", the hf_ clips) for
+punchy short lines. Narrative order:
+1) ~0-4s cold open: brand/logo ("logo asset.png") over dark.
+2) "You're spending money every month just to make your phone ring" — opening talking head.
+3) "Google ads. Local service ads. Yard signs. Door hangers. Social media." — owner/b-roll.
+4) "And when that phone finally rings, nobody picks up."
+5) "That's not a marketing problem. That's a MONEY problem."
+6) The math: "misses 30% of inbound calls... every missed call costs you the lead spend
+   plus the job... $80 to $450, gone, every time nobody answers." — longest stretch, 15s clips.
+7) "Your competitor's truck is pulling into that driveway. YOUR trucks are sitting.
+   YOUR techs are waiting. YOUR schedule has gaps."
+8) "HVAC emergencies don't happen at nine in the morning. They happen at ten at night.
+   In July. 104 degrees, and a family's AC just died. If nobody answers, they call the next company."
+9) "Evolve AI Agents from Intelligent Voice AI answers every call. Books the job.
+   Dispatches your tech. And handles follow-up for every missed lead, 24/7."
+10) "Your trucks stay busy. Your techs stay productive. Your revenue stops leaking."
+11) ~last 5s end card: "logo asset.png" brand card + text "getivai.com/hvac" and beneath
+    it "Stop paying for leads your phone never answers."
+
+STYLE: cinematic and dynamic — smooth crossfades or clean cuts on the beat, subtle
+push-ins where natural. Scale/fill any vertical (9:16) clips to fill the 16:9 frame
+(no black side bars). Keep color cohesive. Cross-dissolve (no hard flash) for cuts in
+the 28-48s math segment so the talking-head stays stable.
+
+CAPTIONS: burned-in, synced to the narration (transcribe the Adriana VO track),
+clean bold sans-serif, bottom-center.
+
+DURATION: target ~89 seconds (87-90s ok). End exactly on the brand card.
