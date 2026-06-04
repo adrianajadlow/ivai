@@ -1,0 +1,15 @@
+{
+  "name": "healthcare-45s",
+  "version": "1.0.0",
+  "description": "Short-form social reel (Instagram / TikTok) for **Intelligent Voice AI (IVAI)** healthcare automation, hosted by Adriana. Built to the same brand system as `../hvac-90s`: deep navy, amber accent, green highlights, condensed display type.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@napi-rs/canvas": "^1.0.0"
+  }
+}
