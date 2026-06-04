@@ -27,8 +27,19 @@ composited in later by Higgsfield gen-id when credits allow.
 `$135,000 / year` · `Books into Athena / Kareo` · `Recovered $41,800` ·
 `GetIVAI.com/healthcare`
 
+## Photos (host build)
+The reel features Adriana's real IVAI photos via cinematic Ken-Burns motion.
+Source frames live in `broll/` (git-ignored) as `proc_*.png`, 1188×2112 cover-crops:
+- `proc_desk` — Adriana at the IVAI reception desk → **Scene 1 (host)**
+- `proc_messy` — chaotic paper-stacked front office → **Scene 2 (the problem)**
+- `proc_walk` — Adriana + colleague in the green hallway → **Scene 2 blend + Scene 4 close**
+- `proc_dash` — green hallway with the "Confirmed Appointments" screen → **Scene 3**
+
+Note: the figures are stills with camera (Ken-Burns) motion — not generative
+subject motion. True walking/high-five animation or a lip-synced talking head
+needs Higgsfield image-to-video (credits).
+
 ## Status
 **Delivered.** `out/IVAI_Healthcare_Reel_vertical_1080x1920.mp4` — 1080×1920,
-30 fps, 45.5 s, ~8 MB, all 7 stat overlays + IVAI end-slate over the Adriana VO.
-Rebuild any time with `bash src/build.sh`. Adriana's photoreal host shots drop
-into Scenes 1 & 3 automatically once `host1`/`host2` stills are on disk (see EDL).
+30 fps, 45.5 s, all 7 stat overlays + the real photos + IVAI end-slate over the
+Adriana VO. Rebuild any time with `bash src/build.sh`.

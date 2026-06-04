@@ -18,10 +18,10 @@ The composition is rendered deterministically by `src/render.js`
 
 | # | Scene | In | Out | Phase | Visual | On-screen overlays |
 |---|-------|----|-----|-------|--------|--------------------|
-| 1 | **Hook** | 0.00 | 16.30 | problem (amber) | "EVERY MISSED CALL IS A LOST PATIENT." + incoming-call cards flipping to **MISSED** | `25` **MISSED CALLS / MONTH** (5.4–11.0) · `$150,000` **WALK OUT THE DOOR / YEAR** (11.2–16.1) |
-| 2 | **The cost** | 16.30 | 32.80 | problem (amber) | "THE REVENUE LEAK" + descending red graph | `35%` **OF PATIENT CALLS UNANSWERED** (17.6–23.8) · `$135,000` **IN LOST REVENUE / YEAR** (24.2–31.5) |
-| 3 | **IVAI solves** | 32.80 | 40.00 | solution (green) | "IVAI ANSWERS 24/7" + live booking card, all slots ✓ booked | **BOOKS APPOINTMENTS INTO ATHENA · KAREO** (33.2–37.0) · `$41,800` **RECOVERED REVENUE** (37.2–39.95) |
-| 4 | **CTA / end-slate** | 40.00 | 45.51 | solution (green) | IVAI. brand card — "EVERY CALL ANSWERED. EVERY PATIENT BOOKED. 24/7" | amber pill **GetIVAI.com/healthcare** (41.0→) |
+| 1 | **Hook** | 0.00 | 16.30 | problem (amber) | Adriana at the IVAI reception desk (`proc_desk`, Ken-Burns push-in) + "EVERY MISSED CALL IS A LOST PATIENT." | `25` **MISSED CALLS / MONTH** (5.4–11.0) · `$150,000` **WALK OUT THE DOOR / YEAR** (11.2–16.1) |
+| 2 | **The cost** | 16.30 | 32.80 | problem (amber) | Messy front office (`proc_messy`, red grade) + leak graph → **dissolve** to Adriana in the hallway (`proc_walk`) | `35%` **OF PATIENT CALLS UNANSWERED** (17.6–23.8) · `$135,000` **IN LOST REVENUE / YEAR** (24.2–31.5) |
+| 3 | **IVAI solves** | 32.80 | 40.00 | solution (green) | Green "Confirmed Appointments" hallway (`proc_dash`) + booking toasts (✓ booked) | **BOOKS APPOINTMENTS INTO ATHENA · KAREO** (33.2–37.0) · `$41,800` **RECOVERED REVENUE** (37.2–39.9) |
+| 4 | **CTA / end-slate** | 40.00 | 45.51 | solution (green) | Adriana + colleague — "THE TEAM THAT NEVER MISSES A CALL" (`proc_walk`) → **dissolve** to IVAI. end-slate | amber pill **GetIVAI.com/healthcare** (42.0→) |
 
 All 7 brief overlays are covered, in the brief's listed order:
 `25 missed calls / month` → `$150,000 / year` → `35% unanswered` →
