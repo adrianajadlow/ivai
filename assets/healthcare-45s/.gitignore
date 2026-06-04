@@ -15,3 +15,6 @@ fonts/
 # Source VO + reference copies (provided separately)
 narration.mp3
 ref_endslate_vertical.png
+
+# Client photos (extracted to disk for compositing; not version-controlled)
+broll/
