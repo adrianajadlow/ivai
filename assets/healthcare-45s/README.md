@@ -28,6 +28,7 @@ composited in later by Higgsfield gen-id when credits allow.
 `GetIVAI.com/healthcare`
 
 ## Status
-Build in progress. The render engine produces the full graphics-forward reel
-from `narration.mp3`; Adriana's photoreal host shots drop into Scenes 1 & 4 once
-her reference stills are available on disk.
+**Delivered.** `out/IVAI_Healthcare_Reel_vertical_1080x1920.mp4` — 1080×1920,
+30 fps, 45.5 s, ~8 MB, all 7 stat overlays + IVAI end-slate over the Adriana VO.
+Rebuild any time with `bash src/build.sh`. Adriana's photoreal host shots drop
+into Scenes 1 & 3 automatically once `host1`/`host2` stills are on disk (see EDL).
