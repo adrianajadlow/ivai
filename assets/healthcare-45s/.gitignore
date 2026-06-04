@@ -1,0 +1,8 @@
+# IVAI Healthcare 45s — build artifacts (regenerated, not version-controlled)
+node_modules/
+package-lock.json
+frames/        # intermediate PNG frame sequence (thousands of files)
+out/           # working render output
+fonts/         # third-party fonts, fetched by scripts/fetch-fonts.sh
+narration.mp3  # source VO (provided separately / lives in uploads)
+ref_endslate_vertical.png  # reference copy of the HVAC end-slate
