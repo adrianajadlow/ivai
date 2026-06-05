@@ -46,8 +46,7 @@ const OVERLAYS = [
   { id: 'lost150',   big: '150,000', label: 'WALK OUT THE DOOR / YEAR',    t0: 11.2, t1: 16.05, tone: 'bad',  count: 150000, pre: '$', post: '' },
   { id: 'unans',     big: '35',      label: 'OF PATIENT CALLS UNANSWERED', t0: 17.6, t1: 23.8,  tone: 'bad',  count: 35,     pre: '',  post: '%' },
   { id: 'lost135',   big: '135,000', label: 'IN LOST REVENUE / YEAR',      t0: 24.2, t1: 31.5,  tone: 'bad',  count: 135000, pre: '$', post: '' },
-  { id: 'books',     big: '',        label: 'BOOKS INTO ATHENA / KAREO',   t0: 33.2, t1: 37.0,  tone: 'good', count: 0,      pre: '',  post: '' },
-  { id: 'recovered', big: '41,800',  label: 'RECOVERED REVENUE',           t0: 37.2, t1: 39.9,  tone: 'good', count: 41800,  pre: '$', post: '' },
+  { id: 'recovered', big: '41,800',  label: 'RECOVERED · FIRST MONTH',     t0: 37.7, t1: 39.9,  tone: 'good', count: 41800,  pre: '$', post: '' },
 ];
 
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
@@ -143,19 +142,41 @@ function leakGraph(ctx, t, t0, alpha) {
   if (prog > 0.02) { ctx.fillStyle = C.red; ctx.beginPath(); ctx.arc(gx + gw * prog, gy + gh * prog, 9, 0, 7); ctx.fill(); }
   ctx.restore();
 }
-function bookedToast(ctx, t) {
-  const items = [['9:00 AM', 'New patient'], ['10:30 AM', 'Follow-up'], ['1:15 PM', 'New patient']];
-  for (let i = 0; i < items.length; i++) {
-    const st = 33.3 + i * 0.5, a = lifecycle(t, st, 39.8, 0.4, 0.5); if (a <= 0) continue;
-    const wd = 540, x = W / 2 - wd / 2, y = 770 + i * 96;
+function featureList(ctx, t) {
+  const feats = ['Books into Athena · Kareo', 'Handles insurance', 'Routes complex cases'];
+  for (let i = 0; i < feats.length; i++) {
+    const st = 33.4 + i * 0.55, a = lifecycle(t, st, 37.7, 0.4, 0.45); if (a <= 0) continue;
+    const wd = 610, x = W / 2 - wd / 2, y = 556 + i * 92;
     ctx.save(); ctx.globalAlpha = a;
-    ctx.fillStyle = hexA('#0c2742', 0.92); ctx.strokeStyle = hexA(C.green, 0.7); ctx.lineWidth = 2; rr(ctx, x, y, wd, 80, 16); ctx.fill(); ctx.stroke();
-    ctx.fillStyle = hexA(C.green, 0.16); ctx.beginPath(); ctx.arc(x + 46, y + 40, 24, 0, 7); ctx.fill();
-    ctx.strokeStyle = C.green; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(x + 35, y + 40); ctx.lineTo(x + 43, y + 50); ctx.lineTo(x + 58, y + 30); ctx.stroke();
-    ctx.textAlign = 'left'; ctx.fillStyle = C.white; ctx.font = `30px ${F.oswald}`; ctx.fillText(items[i][0] + '  ·  ' + items[i][1], x + 86, y + 50);
-    ctx.fillStyle = C.green; ctx.font = `22px ${F.inter}`; ctx.textAlign = 'right'; ctx.fillText('BOOKED', x + wd - 26, y + 49);
+    ctx.fillStyle = hexA('#0c2742', 0.9); ctx.strokeStyle = hexA(C.green, 0.65); ctx.lineWidth = 2; rr(ctx, x, y, wd, 76, 16); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = hexA(C.green, 0.16); ctx.beginPath(); ctx.arc(x + 44, y + 38, 23, 0, 7); ctx.fill();
+    ctx.strokeStyle = C.green; ctx.lineWidth = 6; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(x + 33, y + 38); ctx.lineTo(x + 41, y + 48); ctx.lineTo(x + 56, y + 28); ctx.stroke();
+    ctx.textAlign = 'left'; ctx.fillStyle = C.white; ctx.font = `34px ${F.oswald}`; ctx.fillText(feats[i], x + 84, y + 48);
     ctx.restore();
   }
+}
+function drawPalm(ctx, x, y, dir, s) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(dir * s, s);
+  rr(ctx, -28, -36, 50, 74, 15); ctx.fill();
+  for (let i = 0; i < 4; i++) { rr(ctx, -26 + i * 13, -58, 10, 28, 5); ctx.fill(); }
+  rr(ctx, -42, -8, 20, 26, 10); ctx.fill();
+  ctx.restore();
+}
+function highFive(ctx, t) {
+  const a = lifecycle(t, 40.2, 42.6, 0.4, 0.3); if (a <= 0) return;
+  const cx = W / 2, cy = H * 0.525, hit = easeOut(clamp((t - 40.7) / 0.5));
+  ctx.save(); ctx.globalAlpha = a;
+  ctx.strokeStyle = hexA(C.green, 0.85); ctx.lineWidth = 5; ctx.lineCap = 'round';
+  const rays = 12, R0 = 56 * hit, R1 = 118 + 70 * hit;
+  for (let i = 0; i < rays; i++) { const ang = (i / rays) * Math.PI * 2 + 0.26; ctx.beginPath(); ctx.moveTo(cx + Math.cos(ang) * R0, cy + Math.sin(ang) * R0); ctx.lineTo(cx + Math.cos(ang) * R1, cy + Math.sin(ang) * R1); ctx.stroke(); }
+  if (hit > 0 && hit < 1) { ctx.fillStyle = hexA('#ffffff', (1 - hit) * 0.5); ctx.beginPath(); ctx.arc(cx, cy, 104 * hit, 0, 7); ctx.fill(); }
+  ctx.shadowColor = hexA(C.green, 0.6); ctx.shadowBlur = 18; ctx.fillStyle = '#ffffff';
+  drawPalm(ctx, cx - 22 - (1 - hit) * 80, cy, 1, 0.82);
+  drawPalm(ctx, cx + 22 + (1 - hit) * 80, cy, -1, 0.82);
+  ctx.shadowBlur = 0;
+  ctx.textAlign = 'center'; ctx.fillStyle = C.white; ctx.font = `76px ${F.anton}`; ctx.fillText('HIGH FIVE.', cx, H * 0.73);
+  ctx.fillStyle = C.green; ctx.font = `34px ${F.oswald}`; const s = 'EVERY CALL ANSWERED', lw = trackWidth(ctx, s, 4); track(ctx, s, cx - lw / 2, H * 0.73 + 52, 4);
+  ctx.restore();
 }
 
 // ---- end slate ----
@@ -176,18 +197,17 @@ function endSlate(ctx, t, sT) {
   ctx.font = `70px ${F.anton}`; ctx.fillStyle = C.white; ctx.fillText('EVERY CALL ANSWERED.', W / 2, wy + 200); ctx.fillText('EVERY PATIENT BOOKED.', W / 2, wy + 276);
   ctx.fillStyle = C.green; ctx.font = `76px ${F.anton}`; ctx.fillText('24 / 7', W / 2, wy + 372);
   const pa = easeOut(clamp((t - sT - 0.7) / 0.6)); ctx.globalAlpha = pa;
+  ctx.fillStyle = C.green; ctx.font = `28px ${F.oswald}`; { const fc = 'FREE SAVINGS CALCULATOR', fw = trackWidth(ctx, fc, 5); track(ctx, fc, W / 2 - fw / 2, wy + 438, 5); }
   ctx.font = `44px ${F.oswald}`; const cta = 'GetIVAI.com/healthcare', cw = ctx.measureText(cta).width + 96, pulse = 1 + 0.02 * Math.sin((t - sT) * 6);
-  ctx.translate(W / 2, wy + 492); ctx.scale(pulse, pulse); ctx.fillStyle = C.amber; rr(ctx, -cw / 2, -44, cw, 88, 44); ctx.fill();
-  ctx.fillStyle = '#10180c'; ctx.textBaseline = 'middle'; ctx.fillText(cta, 0, 3);
+  ctx.translate(W / 2, wy + 504); ctx.scale(pulse, pulse); ctx.fillStyle = C.amber; rr(ctx, -cw / 2, -44, cw, 88, 44); ctx.fill();
+  ctx.fillStyle = '#10180c'; ctx.textBaseline = 'middle'; ctx.textAlign = 'center'; ctx.fillText(cta, 0, 3);
   ctx.restore();
 }
 function drawCTA(ctx, t) {
-  const sT = 41.3, eIn = easeOut(clamp((t - sT) / 0.8));
+  const sT = 42.6, eIn = easeOut(clamp((t - sT) / 0.7));
   if (eIn < 1) {
     photoLayer(ctx, P.walk, t, 40.0, 45.5, 'right', null); scrims(ctx);
-    const ca = easeOut(clamp((t - 40.2) / 0.8)); ctx.save(); ctx.globalAlpha = ca * (1 - eIn); ctx.textAlign = 'center';
-    ctx.font = `60px ${F.anton}`; ctx.fillStyle = C.white; ctx.fillText('THE TEAM THAT', W / 2, H * 0.60);
-    ctx.fillStyle = C.green; ctx.fillText('NEVER MISSES A CALL.', W / 2, H * 0.60 + 68); ctx.restore();
+    highFive(ctx, t);
   }
   if (eIn > 0) { ctx.save(); ctx.globalAlpha = eIn; endSlate(ctx, t, sT); ctx.restore(); }
 }
@@ -210,8 +230,8 @@ function drawFrame(ctx, t) {
     topHeadline(ctx, ['THE REVENUE', 'LEAK.'], C.red, t, 16.5);
   } else if (s.key === 'solve') {
     photoLayer(ctx, P.dash, t, s.t0, s.t1, 'in', 'green'); scrims(ctx);
-    topHeadline(ctx, ['IVAI ANSWERS 24/7.'], C.green, t, 33.0, 70);
-    bookedToast(ctx, t);
+    topHeadline(ctx, ['IVAI ANSWERS', 'EVERY CALL.'], C.green, t, 33.0, 60);
+    featureList(ctx, t);
   }
   for (const ov of OVERLAYS) statOverlay(ctx, ov, t, STAT_YC);
   vignette(ctx); chrome(ctx, t, s); grain(ctx, t); cutFlash(ctx, t);
